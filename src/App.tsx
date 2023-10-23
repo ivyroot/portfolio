@@ -14,7 +14,7 @@ const Cube = () => {
   });
 
   return (
-    <mesh ref={cube}>
+    <mesh ref={cube} position={[3,0,0]} >
       <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color="#0391BA" />
     </mesh>
