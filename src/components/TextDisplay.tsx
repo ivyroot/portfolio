@@ -12,11 +12,11 @@ export interface TextDisplayProps {
 export const TextDisplay = (props: TextDisplayProps) => {
     const txRef = useRef<THREE.Mesh | null>(null);
     const materialRef = useRef<THREE.MeshStandardMaterial | null>(null);
-    const fontSize = 1.25;
+    const fontSize = 1.0;
     const descriptionPosition = new THREE.Vector3(props.position[0], props.position[1] - 1.5, props.position[2]);
-    const descriptionFontSize = 0.75;
-    const fontColor = '#EEEEEE'
-    const fontColorHover = 'royalblue'
+    const descriptionFontSize = 0.5;
+    const fontColor = 'green'
+    const fontColorHover = 'black'
 
     const handleTextClick = () => {
         if (props.url) {
@@ -42,6 +42,9 @@ export const TextDisplay = (props: TextDisplayProps) => {
                     position={props.position}
                     ref={txRef}
                     textAlign='center'
+                    strokeColor={'#000000'}
+                    strokeWidth={'1%'}
+                    strokeOpacity={0.85}
                     onClick={handleTextClick}
                     onPointerOver={handlePointerOver}
                     onPointerOut={handlePointerOut}
@@ -57,6 +60,9 @@ export const TextDisplay = (props: TextDisplayProps) => {
             <Text
                     position={descriptionPosition}
                     fontSize={descriptionFontSize}
+                    strokeColor={'#000000'}
+                    strokeWidth={'1%'}
+                    strokeOpacity={0.85}
                     textAlign='center'
                     anchorX="center"
                     anchorY="middle" >
