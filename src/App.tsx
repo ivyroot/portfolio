@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
 import './App.css';
 import { PortfolioItems } from './components/PortfolioItems';
+import { useScreenSize } from './hooks/useScreenSize';
 
 const minOffset = 0.0
 const maxOffset = 30.0
@@ -17,6 +18,8 @@ const Scene = (props: {offset: number}) => {
 };
 
 function App() {
+  const screenSize = useScreenSize();
+
   const [offset, setOffset] = React.useState(minOffset);
 
   const onWheel = (e: React.WheelEvent) => {

@@ -7,16 +7,20 @@ export interface TextDisplayProps {
     url?: string;
     copy: string;
     description: string;
+    maxWidth?: number;
 }
 
 export const TextDisplay = (props: TextDisplayProps) => {
     const txRef = useRef<THREE.Mesh | null>(null);
     const materialRef = useRef<THREE.MeshStandardMaterial | null>(null);
-    const fontSize = 1.0;
-    const descriptionPosition = new THREE.Vector3(props.position[0], props.position[1] - 1.5, props.position[2]);
-    const descriptionFontSize = 0.5;
+    const isMobile = props.maxWidth && props.maxWidth < 500;
+    const fontSize = isMobile ? 0.5 : 1.0;
+    const descriptionOffset = isMobile ? 0.95 : 1.5;
+    const descriptionPosition = new THREE.Vector3(props.position[0], props.position[1] - descriptionOffset, props.position[2]);
+    const descriptionFontSize = isMobile ? 0.3 : 0.5;
     const fontColor = '#ffffff'
-    const fontColorHover = '#fdf50d' // '#3286ee'
+    const fontColorHover = '#fdf50d'
+    const maxWidth = isMobile ? 4 : Infinity;
 
     const lightPos = new THREE.Vector3(props.position[0], props.position[1], props.position[2] + 5.2);
 
@@ -45,6 +49,7 @@ export const TextDisplay = (props: TextDisplayProps) => {
             <pointLight intensity={10000.0} position={lightPos} />
             <Text
                     position={props.position}
+                    maxWidth={maxWidth}
                     ref={txRef}
                     textAlign='center'
                     strokeColor={'#000000'}
@@ -66,6 +71,7 @@ export const TextDisplay = (props: TextDisplayProps) => {
             </Text>
             <Text
                     position={descriptionPosition}
+                    maxWidth={maxWidth}
                     strokeColor={'#000000'}
                     strokeWidth={'1%'}
                     strokeOpacity={0.85}
