@@ -1,6 +1,6 @@
 import React,  { Suspense, useRef } from 'react';
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { Stats, OrbitControls } from "@react-three/drei";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Stats, OrbitControls, OrbitControlsProps } from "@react-three/drei";
 import * as THREE from "three";
 
 import logo from './logo.svg';
@@ -9,7 +9,6 @@ interface CirclePointsProps {
   radius: number;
   numPoints: number;
 }
-
 
 const Floor = () => {
   const floor = useRef<THREE.Mesh | null>(null);
