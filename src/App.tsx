@@ -1,4 +1,4 @@
-import React,  { Suspense } from 'react';
+import React,  { Suspense, useState } from 'react';
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
 import './App.css';
@@ -19,14 +19,34 @@ const Scene = (props: {offset: number}) => {
 
 function App() {
   const screenSize = useScreenSize();
-
+  const isMobile = screenSize.width && screenSize.width < 500;
   const [offset, setOffset] = React.useState(minOffset);
+  const [initialTouchY, setInitialTouchY] = useState<number | null>(null);
 
   const onWheel = (e: React.WheelEvent) => {
     const newOffset = offset + (e.deltaY * 0.01);
     const cappedOffset = Math.max(Math.min(maxOffset, newOffset), minOffset);
     setOffset(cappedOffset);
   }
+
+  const handleTouchStart = (event: React.TouchEvent) => {
+    setInitialTouchY(event.touches[0].clientY);
+  };
+
+  const handleTouchMove = (event: React.TouchEvent) => {
+    if (initialTouchY === null) return;
+    if (!isMobile) return;
+    const currentTouchY = event.touches[0].clientY;
+    const differenceY = currentTouchY - initialTouchY;
+    const newOffset = offset + (differenceY * -0.0008)
+    const cappedOffset = Math.max(Math.min(maxOffset, newOffset), minOffset);
+    setOffset(cappedOffset);
+  };
+
+  const handleTouchEnd = () => {
+    // Reset initial touch position
+    setInitialTouchY(null);
+  };
 
   return (
     <div className="App">
@@ -48,12 +68,17 @@ function App() {
               gl.setClearColor("white");
             }}
             onWheel={onWheel}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
-            <OrbitControls
-              enableZoom={false}
-              autoRotate={true}
-              autoRotateSpeed={0.1}
-              enableDamping={true} />
+            {!isMobile &&
+              <OrbitControls
+                enableZoom={false}
+                autoRotate={true}
+                autoRotateSpeed={0.1}
+                enableDamping={true} />
+            }
             <Suspense fallback={null}>
               <Scene offset={offset} />
             </Suspense>
