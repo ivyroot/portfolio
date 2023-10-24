@@ -1,5 +1,5 @@
 import React,  { Suspense, useRef } from 'react';
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { TextDisplay } from './components/TextDisplay';
@@ -7,7 +7,7 @@ import { CircularColumns } from './components/Columns';
 
 import './App.css';
 
-
+const minOffset = -3.0
 
 interface SceneProps {
   offset: number;
@@ -15,10 +15,19 @@ interface SceneProps {
 
 const Scene = (props: SceneProps) => {
   const { camera } = useThree();
+  const groupRef = useRef<THREE.Group | null>(null);
   camera.position.y = props.offset;
+
+  useFrame(() => {
+    if (groupRef.current && (props.offset > minOffset - 3.0)) {
+      groupRef.current.rotation.y -= 0.0003;
+    }
+  })
+
 
   return (
     <>
+      <group ref={groupRef} >
       <pointLight intensity={1000.0} position={[0,0,7.2]} />
       <pointLight intensity={1000.0} position={[0, -10, 7.2]} />
       <pointLight intensity={1000.0} position={[0, -20, 7.2]} />
@@ -26,7 +35,8 @@ const Scene = (props: SceneProps) => {
       <TextDisplay
         position={[0,0,0]}
         copy={'Ivyroot'}
-        description={'Here are some projects I have built:'}
+        url={'https://www.github.com/ivyroot'}
+        description={'Welcome to my portfolio...'}
       />
       <TextDisplay
         position={[0,-5,0]}
@@ -58,13 +68,14 @@ const Scene = (props: SceneProps) => {
         copy={'Shuffler'}
         description={"View your camera roll in random order (inactive)."}
       />
+      </group>
     </>
   );
 };
 
 function App() {
-  const [offset, setOffset] = React.useState(-3);
-  const startingTarget = new THREE.Vector3(0, -3.0, 0);
+  const [offset, setOffset] = React.useState(minOffset);
+  const startingTarget = new THREE.Vector3(0, minOffset, 0);
   const [cameraTarget, setCameraTarget] = React.useState(startingTarget);
 
   return (
@@ -84,11 +95,11 @@ function App() {
               position: [0, 0, 7],
             }}
             onCreated={({ gl }) => {
-              gl.setClearColor("#BBCCFF");
+              gl.setClearColor("blue");
             }}
             onWheel={(e) => {
               const newOffset = offset + (e.deltaY * -0.01);
-              const cappedOffset = Math.max(Math.min(0, newOffset), -30);
+              const cappedOffset = Math.max(Math.min(minOffset, newOffset), -35);
               setOffset(cappedOffset);
               const newTarget = new THREE.Vector3(0, cappedOffset, 0);
               setCameraTarget(newTarget);
