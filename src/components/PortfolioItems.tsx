@@ -58,7 +58,7 @@ export const PortfolioItems = (props: PortfolioItemsProps) => {
                         key={index}
                         position={[0, itemHeight * index * -1, 0]}
                         maxWidth={maxWidth}
-                        copy={item.title}
+                        copy={item.title + ' '  + maxWidth}
                         url={item.url}
                         description={item.description}
                     />
