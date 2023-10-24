@@ -15,7 +15,7 @@ export const TextDisplay = (props: TextDisplayProps) => {
     const fontSize = 1.25;
     const descriptionPosition = new THREE.Vector3(props.position[0], props.position[1] - 1.5, props.position[2]);
     const descriptionFontSize = 0.75;
-    const fontColor = '#222'
+    const fontColor = '#EEEEEE'
     const fontColorHover = 'royalblue'
 
     const handleTextClick = () => {

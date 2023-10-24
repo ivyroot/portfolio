@@ -19,8 +19,7 @@ const Scene = (props: SceneProps) => {
 
   return (
     <>
-      <group>
-      <pointLight intensity={1000.0} position={[-5, -8, -5]} />
+      <pointLight intensity={1000.0} position={[0,0,7.2]} />
       <pointLight intensity={1000.0} position={[5, 8, 5]} />
       <CircularColumns radius={10} numColumns={9} thickness={0.8} height={80} />
       <TextDisplay
@@ -53,7 +52,6 @@ const Scene = (props: SceneProps) => {
         copy={'Shuffler'}
         description={"View your camera roll in random order (inactive)."}
       />
-      </group>
     </>
   );
 };
@@ -84,8 +82,9 @@ function App() {
             }}
             onWheel={(e) => {
               const newOffset = offset + (e.deltaY * -0.01);
-              setOffset(newOffset);
-              const newTarget = new THREE.Vector3(0, newOffset, 0);
+              const cappedOffset = Math.max(Math.min(0, newOffset), -30);
+              setOffset(cappedOffset);
+              const newTarget = new THREE.Vector3(0, cappedOffset, 0);
               setCameraTarget(newTarget);
             }}
           >
