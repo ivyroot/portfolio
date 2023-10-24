@@ -5,9 +5,6 @@ import './App.css';
 import { PortfolioItems } from './components/PortfolioItems';
 import { useScreenSize } from './hooks/useScreenSize';
 
-const minOffset = 0.0
-const maxOffset = 30.0
-
 const Scene = (props: {offset: number}) => {
   return (
     <>
@@ -20,6 +17,10 @@ const Scene = (props: {offset: number}) => {
 function App() {
   const screenSize = useScreenSize();
   const isMobile = screenSize.width && screenSize.width < 500;
+
+  const minOffset = 0.0
+  const maxOffset = isMobile ? 17:  30
+
   const [offset, setOffset] = React.useState(minOffset);
   const [initialTouchY, setInitialTouchY] = useState<number | null>(null);
 
