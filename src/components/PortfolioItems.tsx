@@ -13,7 +13,7 @@ export const PortfolioItems = (props: PortfolioItemsProps) => {
                 position={[0,0,0]}
                 copy={'ivyroot'}
                 url={'https://www.warpcast.com/ivyroot'}
-                description={'I am a full stack developer.\nHere are some projects I have built.'}
+                description={'I am a full stack developer.\n Here are some projects I have built.'}
             />
             <TextDisplay
                 position={[0,-5,0]}
