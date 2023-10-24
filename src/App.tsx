@@ -50,12 +50,34 @@ const Scene = () => {
       <CirclePoints radius={10} numPoints={9} />
       <TextDisplay
         position={[0,0,0]}
-        title={true}
         url={'https://www.exquisitecanvas.xyz'}
-        copy={'Exquisite Canvas'} />
+        copy={'Exquisite Canvas'}
+        description={'Draw your own pixel art.'}
+      />
       <TextDisplay
-        position={[0,-1.25,0]}
-        copy={'Draw your own pixel art'} />
+        position={[0,-5,0]}
+        url={'https://www.tokenparade.xyz'}
+        copy={'Token Parade'}
+        description={"Parade the art from any wallet's NFTs."}
+      />
+      <TextDisplay
+        position={[0,-10,0]}
+        url={'https://www.saffene.com'}
+        copy={'Saffene Phone Stand'}
+        description={"Robust minimal phone stand."}
+      />
+      <TextDisplay
+        position={[0,-15,0]}
+        url={'https://thenextweb.com/news/privacy-isnt-an-issue-with-burn-note-because-all-messages-will-self-destruct'}
+        copy={'Burn Note'}
+        description={"Ephemeral messaging app (inactive)."}
+      />
+      <TextDisplay
+        position={[0,-20,0]}
+        url={'https://appadvice.com/app/shuffler-photo-browser/980966633'}
+        copy={'Shuffler'}
+        description={"View your camera roll in random order (inactive)."}
+      />
     </>
   );
 };
