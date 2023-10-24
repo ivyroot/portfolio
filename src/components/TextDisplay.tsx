@@ -66,10 +66,11 @@ export const TextDisplay = (props: TextDisplayProps) => {
             </Text>
             <Text
                     position={descriptionPosition}
-                    fontSize={descriptionFontSize}
                     strokeColor={'#000000'}
                     strokeWidth={'1%'}
                     strokeOpacity={0.85}
+                    lineHeight={1.25}
+                    fontSize={descriptionFontSize}
                     textAlign='center'
                     anchorX="center"
                     anchorY="middle" >
