@@ -1,6 +1,6 @@
 import React,  { Suspense, useRef } from 'react';
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Stats, OrbitControls, OrbitControlsProps } from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Stats, OrbitControls, Html } from "@react-three/drei";
 import * as THREE from "three";
 
 import logo from './logo.svg';
@@ -15,7 +15,7 @@ const Floor = () => {
   return (
     <mesh ref={floor} rotation={[-Math.PI / 2, 0, 0]} position={[0, -10, 0]}>
       <planeGeometry args={[1000, 1000]} />
-      <meshStandardMaterial metalness={0.0} roughness={0.8} color={'#DDFFDD'} />
+      <meshStandardMaterial metalness={0.0} roughness={0.5} color={'#FFFFFF'} />
    </mesh>
   );
 };
@@ -30,8 +30,11 @@ const Cube = () => {
 
   return (
     <mesh ref={cube} position={[0,0,0]} >
-      <boxGeometry args={[4, 2, 1]} />
-      <meshStandardMaterial color="#FFFFFF" />
+      <Html>
+          <div style={{ color: 'white', background: 'rgba(0,0,0,0.5)', padding: '5px' }}>
+            Exquisite Canvas
+          </div>
+        </Html>
     </mesh>
   );
 };
@@ -58,7 +61,7 @@ const CirclePoints: React.FC<CirclePointsProps> = ({ radius, numPoints }) => {
     <group>
       {points.map((point, i) => (
         <mesh key={i} position={point}>
-          <cylinderGeometry args={[0.72, 0.72, 20]} />
+          <cylinderGeometry args={[0.92, 0.92, 30]} />
           <meshStandardMaterial metalness={0.9} roughness={0.1}  color="#333399" />
         </mesh>
       ))}
@@ -72,7 +75,7 @@ const Scene = () => {
       <pointLight intensity={1000.0} position={[-5, -8, -5]} />
       <pointLight intensity={1000.0} position={[5, 8, 5]} />
       <Cube />
-      <CirclePoints radius={5.25} numPoints={9} />
+      <CirclePoints radius={10} numPoints={9} />
       <Floor />
     </>
   );
@@ -95,8 +98,7 @@ function App() {
               zoom: 1,
             }}
             onCreated={({ gl }) => {
-              // gl.setClearColor("#252934");
-              gl.setClearColor("#cecede");
+              gl.setClearColor("#BBCCFF");
             }}
           >
             <Stats />
