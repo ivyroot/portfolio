@@ -16,7 +16,7 @@ export const TextDisplay = (props: TextDisplayProps) => {
     const descriptionPosition = new THREE.Vector3(props.position[0], props.position[1] - 1.5, props.position[2]);
     const descriptionFontSize = 0.5;
     const fontColor = '#ffffff'
-    const fontColorHover = '#3286ee'
+    const fontColorHover = '#fdf50d' // '#3286ee'
 
     const lightPos = new THREE.Vector3(props.position[0], props.position[1], props.position[2] + 5.2);
 

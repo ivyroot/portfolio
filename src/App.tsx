@@ -1,18 +1,13 @@
-import React,  { Suspense, useRef } from 'react';
-import { Canvas, useFrame } from "@react-three/fiber";
+import React,  { Suspense } from 'react';
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
-import * as THREE from "three";
 import './App.css';
 import { PortfolioItems } from './components/PortfolioItems';
 
 const minOffset = 0.0
 const maxOffset = 30.0
 
-interface SceneProps {
-  offset: number;
-}
-
-const Scene = (props: SceneProps) => {
+const Scene = (props: {offset: number}) => {
   return (
     <>
       <Environment files="/field_2k.hdr" background={true} />
