@@ -2,33 +2,45 @@ import React,  { useRef } from 'react';
 import {  Text } from "@react-three/drei";
 import * as THREE from "three";
 
-export const TextDisplay = () => {
+export interface TextDisplayProps {
+    position: [number, number, number];
+    url?: string;
+    copy: string;
+}
+
+export const TextDisplay = (props: TextDisplayProps) => {
     const txRef = useRef<THREE.Mesh | null>(null);
     const materialRef = useRef<THREE.MeshStandardMaterial | null>(null);
 
     const handleTextClick = () => {
-      window.open('https://exquisitecanvas.xyz', '_blank');
+        if (props.url) {
+            window.open(props.url, '_blank');
+        }
     }
 
     const handlePointerOver = () => {
-      materialRef.current!.color.set('green');
+        if (props.url) {
+            materialRef.current!.color.set('blue');
+        }
     }
 
     const handlePointerOut = () => {
-      materialRef.current!.color.set('royalblue');
+        if (props.url) {
+            materialRef.current!.color.set('royalblue');
+        }
     }
 
     return(
       <Text
-          position={[0, 0, 0]}
+          position={props.position}
           ref={txRef}
           onClick={handleTextClick}
           onPointerOver={handlePointerOver}
           onPointerOut={handlePointerOut}
           anchorX="center"
           anchorY="middle">
-          <meshStandardMaterial ref={materialRef} color={'royalblue'} side={THREE.DoubleSide}/>
-        hello world!
+          <meshStandardMaterial ref={materialRef} color={'royalblue'} side={THREE.DoubleSide} />
+        { props.copy }
       </Text>
     )
 }

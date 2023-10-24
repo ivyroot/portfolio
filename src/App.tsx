@@ -54,7 +54,10 @@ const Scene = () => {
     <>
       <pointLight intensity={1000.0} position={[-5, -8, -5]} />
       <pointLight intensity={1000.0} position={[5, 8, 5]} />
-      <TextDisplay />
+      <TextDisplay
+        position={[0,0,0]}
+        url={'https://www.exquisitecanvas.xyz'}
+        copy={'Exquisite Canvas'} />
       <CirclePoints radius={10} numPoints={9} />
       <Floor />
     </>
