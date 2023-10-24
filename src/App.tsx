@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { Stats, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { TextDisplay } from './components/TextDisplay';
+import { Floor } from './components/Floor';
 
 import './App.css';
 interface CirclePointsProps {
@@ -10,15 +11,7 @@ interface CirclePointsProps {
   numPoints: number;
 }
 
-const Floor = () => {
-  const floor = useRef<THREE.Mesh | null>(null);
-  return (
-    <mesh ref={floor} rotation={[-Math.PI / 2, 0, 0]} position={[0, -10, 0]}>
-      <planeGeometry args={[1000, 1000]} />
-      <meshStandardMaterial metalness={0.0} roughness={0.5} color={'#FFFFFF'} />
-   </mesh>
-  );
-};
+
 
 function generateCirclePoints(radius: number, numPoints: number): THREE.Vector3[] {
   const points: THREE.Vector3[] = [];
@@ -41,7 +34,7 @@ const CirclePoints: React.FC<CirclePointsProps> = ({ radius, numPoints }) => {
     <group>
       {points.map((point, i) => (
         <mesh key={i} position={point}>
-          <cylinderGeometry args={[0.92, 0.92, 30]} />
+          <cylinderGeometry args={[0.92, 0.92, 80]} />
           <meshStandardMaterial metalness={0.9} roughness={0.1}  color="#333399" />
         </mesh>
       ))}
@@ -54,12 +47,15 @@ const Scene = () => {
     <>
       <pointLight intensity={1000.0} position={[-5, -8, -5]} />
       <pointLight intensity={1000.0} position={[5, 8, 5]} />
+      <CirclePoints radius={10} numPoints={9} />
       <TextDisplay
         position={[0,0,0]}
+        title={true}
         url={'https://www.exquisitecanvas.xyz'}
         copy={'Exquisite Canvas'} />
-      <CirclePoints radius={10} numPoints={9} />
-      <Floor />
+      <TextDisplay
+        position={[0,-1.25,0]}
+        copy={'Draw your own pixel art'} />
     </>
   );
 };
