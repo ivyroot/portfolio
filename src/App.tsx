@@ -1,22 +1,28 @@
 import React,  { Suspense, useRef } from 'react';
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import { Stats, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { TextDisplay } from './components/TextDisplay';
-import { Floor } from './components/Floor';
 import { CircularColumns } from './components/Columns';
 
 import './App.css';
 
 
 
+interface SceneProps {
+  offset: number;
+}
 
-const Scene = () => {
+const Scene = (props: SceneProps) => {
+  const { camera } = useThree();
+  camera.position.y = props.offset;
+
   return (
     <>
+      <group>
       <pointLight intensity={1000.0} position={[-5, -8, -5]} />
       <pointLight intensity={1000.0} position={[5, 8, 5]} />
-      <CircularColumns radius={10} numColumns={9} thickness={1.0} height={80} />
+      <CircularColumns radius={10} numColumns={9} thickness={0.8} height={80} />
       <TextDisplay
         position={[0,0,0]}
         url={'https://www.exquisitecanvas.xyz'}
@@ -47,11 +53,16 @@ const Scene = () => {
         copy={'Shuffler'}
         description={"View your camera roll in random order (inactive)."}
       />
+      </group>
     </>
   );
 };
 
 function App() {
+  const [offset, setOffset] = React.useState(0);
+  const startingTarget = new THREE.Vector3(0, 0, 0);
+  const [cameraTarget, setCameraTarget] = React.useState(startingTarget);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -66,15 +77,21 @@ function App() {
               near: 0.1,
               far: 1000,
               zoom: 1,
+              position: [0, 0, 7],
             }}
             onCreated={({ gl }) => {
               gl.setClearColor("#BBCCFF");
             }}
+            onWheel={(e) => {
+              const newOffset = offset + (e.deltaY * -0.01);
+              setOffset(newOffset);
+              const newTarget = new THREE.Vector3(0, newOffset, 0);
+              setCameraTarget(newTarget);
+            }}
           >
-            <Stats />
-            <OrbitControls />
+            <OrbitControls enableZoom={false} target={cameraTarget} />
             <Suspense fallback={null}>
-              <Scene />
+              <Scene offset={offset} />
             </Suspense>
           </Canvas>
         </div>

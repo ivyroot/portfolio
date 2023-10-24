@@ -15,6 +15,8 @@ export const TextDisplay = (props: TextDisplayProps) => {
     const fontSize = 1.25;
     const descriptionPosition = new THREE.Vector3(props.position[0], props.position[1] - 1.5, props.position[2]);
     const descriptionFontSize = 0.75;
+    const fontColor = '#222'
+    const fontColorHover = 'royalblue'
 
     const handleTextClick = () => {
         if (props.url) {
@@ -24,13 +26,13 @@ export const TextDisplay = (props: TextDisplayProps) => {
 
     const handlePointerOver = () => {
         if (props.url) {
-            materialRef.current!.color.set('blue');
+            materialRef.current!.color.set(fontColorHover);
         }
     }
 
     const handlePointerOut = () => {
         if (props.url) {
-            materialRef.current!.color.set('royalblue');
+            materialRef.current!.color.set(fontColor);
         }
     }
 
@@ -48,7 +50,7 @@ export const TextDisplay = (props: TextDisplayProps) => {
                     anchorY="middle" >
                 <meshStandardMaterial
                     ref={materialRef}
-                    color={'royalblue'}
+                    color={fontColor}
                     side={THREE.DoubleSide} />
                 { props.copy }
             </Text>
@@ -59,7 +61,7 @@ export const TextDisplay = (props: TextDisplayProps) => {
                     anchorX="center"
                     anchorY="middle" >
                 <meshStandardMaterial
-                    color={'royalblue'}
+                    color={fontColor}
                     side={THREE.DoubleSide} />
                 { props.description }
             </Text>

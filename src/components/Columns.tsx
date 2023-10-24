@@ -29,7 +29,7 @@ export const CircularColumns: React.FC<CircularColumnsProps> = ({ radius, numCol
         {points.map((point, i) => (
           <mesh key={i} position={point}>
             <cylinderGeometry args={[thickness, thickness, height]} />
-            <meshStandardMaterial metalness={0.9} roughness={0.1}  color="#333399" />
+            <meshStandardMaterial metalness={0.9} roughness={0}  color="white" />
           </mesh>
         ))}
       </group>
