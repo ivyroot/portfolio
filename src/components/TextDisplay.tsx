@@ -16,7 +16,9 @@ export const TextDisplay = (props: TextDisplayProps) => {
     const descriptionPosition = new THREE.Vector3(props.position[0], props.position[1] - 1.5, props.position[2]);
     const descriptionFontSize = 0.5;
     const fontColor = '#ffffff'
-    const fontColorHover = 'green'
+    const fontColorHover = '#1cd960'
+
+    const lightPos = new THREE.Vector3(props.position[0], props.position[1], props.position[2] + 5.2);
 
     const handleTextClick = () => {
         if (props.url) {
@@ -27,17 +29,20 @@ export const TextDisplay = (props: TextDisplayProps) => {
     const handlePointerOver = () => {
         if (props.url) {
             materialRef.current!.color.set(fontColorHover);
+            materialRef.current!.metalness = 1.0;
         }
     }
 
     const handlePointerOut = () => {
         if (props.url) {
             materialRef.current!.color.set(fontColor);
+            materialRef.current!.metalness = 0.0;
         }
     }
 
     return(
         <group>
+            <pointLight intensity={10000.0} position={lightPos} />
             <Text
                     position={props.position}
                     ref={txRef}
@@ -54,6 +59,8 @@ export const TextDisplay = (props: TextDisplayProps) => {
                 <meshStandardMaterial
                     ref={materialRef}
                     color={fontColor}
+                    metalness={0.0}
+                    roughness={0.1}
                     side={THREE.DoubleSide} />
                 { props.copy }
             </Text>
