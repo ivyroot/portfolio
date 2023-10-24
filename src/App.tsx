@@ -6,7 +6,7 @@ import './App.css';
 import { PortfolioItems } from './components/PortfolioItems';
 
 const minOffset = 0.0
-const maxOffset = 26.0
+const maxOffset = 30.0
 
 interface SceneProps {
   offset: number;
