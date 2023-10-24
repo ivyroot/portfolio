@@ -39,7 +39,7 @@ function App() {
     if (!isMobile) return;
     const currentTouchY = event.touches[0].clientY;
     const differenceY = currentTouchY - initialTouchY;
-    const newOffset = offset + (differenceY * -0.0008)
+    const newOffset = offset + (differenceY * -0.0010)
     const cappedOffset = Math.max(Math.min(maxOffset, newOffset), minOffset);
     setOffset(cappedOffset);
   };
