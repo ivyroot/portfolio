@@ -46,7 +46,7 @@ const items = [
     {
         'title': '@ivyroot',
         'url': 'https://www.warpcast.com/ivyroot',
-        'description': 'Follow me on Warpcast.'
+        'description': 'Follow me on Farcaster.'
     },
 ]
 
