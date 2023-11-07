@@ -24,7 +24,7 @@ const items = [
     },
     {
         'title': 'Nonagon Cup',
-        'url': 'https://nonagoncup.com/wrap/?tokenId=200',
+        'url': 'https://nonagoncup.com/wrap/?tokenId=23',
         'description': "Wrap a 3D cup in your browser."
     },
     {
