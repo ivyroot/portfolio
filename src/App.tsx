@@ -51,7 +51,6 @@ function App() {
     const differenceX = initialTouchX ? currentTouchX - initialTouchX : currentTouchX;
     const newRotation = rotation + (differenceX * 0.00010)
     setRotation(newRotation)
-    console.log(`setting rotation to ${newRotation}`)
   };
 
   const handleTouchEnd = () => {
