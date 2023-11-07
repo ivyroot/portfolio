@@ -5,11 +5,11 @@ import './App.css';
 import { PortfolioItems } from './components/PortfolioItems';
 import { useScreenSize } from './hooks/useScreenSize';
 
-const Scene = (props: {offset: number}) => {
+const Scene = (props: {offset: number, rotation: number}) => {
   return (
     <>
       <Environment files="/field_2k.hdr" background={true} />
-      <PortfolioItems offset={props.offset} />
+      <PortfolioItems offset={props.offset} rotation={props.rotation} />
     </>
   );
 };
@@ -22,7 +22,9 @@ function App() {
   const maxOffset = isMobile ? 17:  30
 
   const [offset, setOffset] = React.useState(minOffset);
+  const [rotation, setRotation] = React.useState(0)
   const [initialTouchY, setInitialTouchY] = useState<number | null>(null);
+  const [initialTouchX, setInitialTouchX] = useState<number | null>(null);
 
   const onWheel = (e: React.WheelEvent) => {
     const newOffset = offset + (e.deltaY * 0.01);
@@ -32,6 +34,7 @@ function App() {
 
   const handleTouchStart = (event: React.TouchEvent) => {
     setInitialTouchY(event.touches[0].clientY);
+    setInitialTouchX(event.touches[0].clientX);
   };
 
   const handleTouchMove = (event: React.TouchEvent) => {
@@ -42,6 +45,13 @@ function App() {
     const newOffset = offset + (differenceY * -0.0010)
     const cappedOffset = Math.max(Math.min(maxOffset, newOffset), minOffset);
     setOffset(cappedOffset);
+
+
+    const currentTouchX = event.touches[0].clientX;
+    const differenceX = initialTouchX ? currentTouchX - initialTouchX : currentTouchX;
+    const newRotation = rotation + (differenceX * 0.00010)
+    setRotation(newRotation)
+    console.log(`setting rotation to ${newRotation}`)
   };
 
   const handleTouchEnd = () => {
@@ -81,7 +91,7 @@ function App() {
                 enableDamping={true} />
             }
             <Suspense fallback={null}>
-              <Scene offset={offset} />
+              <Scene offset={offset} rotation={rotation} />
             </Suspense>
           </Canvas>
         </div>

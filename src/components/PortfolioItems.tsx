@@ -4,13 +4,14 @@ import { useScreenSize} from '../hooks/useScreenSize';
 
 export interface PortfolioItemsProps {
     offset: number;
+    rotation: number;
 }
 
 const items = [
     {
         'title': 'ivyroot',
         'url': 'https://www.warpcast.com/ivyroot',
-        'description': 'I am a full stack developer.\n Here are some projects I have built.'
+        'description': 'Portfolio of creative projects:'
     },
     {
         'title': 'Exquisite Canvas',
@@ -42,14 +43,20 @@ const items = [
         'url': 'https://appadvice.com/app/shuffler-photo-browser/980966633',
         'description': "View your camera roll in random order (inactive)."
     },
+    {
+        'title': '@ivyroot',
+        'url': 'https://www.warpcast.com/ivyroot',
+        'description': 'Follow me on Warpcast.'
+    },
 ]
 
 
 export const PortfolioItems = (props: PortfolioItemsProps) => {
+    const {offset, rotation} = props;
     const screenSize = useScreenSize();
     const maxWidth = screenSize.width;
     const itemHeight = maxWidth && maxWidth < 500 ? 3 : 5;
-    const pos = new Vector3(0, props.offset + 2, 0)
+    const pos = new Vector3(0, offset + 2, 0)
     return(
         <group position={pos}>
             {items.map((item, index) => {
@@ -57,6 +64,7 @@ export const PortfolioItems = (props: PortfolioItemsProps) => {
                     <TextDisplay
                         key={index}
                         position={[0, itemHeight * index * -1, 0]}
+                        rotation={[0, rotation, 0]}
                         maxWidth={maxWidth}
                         copy={item.title}
                         url={item.url}

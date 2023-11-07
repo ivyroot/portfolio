@@ -4,6 +4,7 @@ import * as THREE from "three";
 
 export interface TextDisplayProps {
     position: [number, number, number];
+    rotation: [number, number, number];
     url?: string;
     copy: string;
     description: string;
@@ -45,7 +46,7 @@ export const TextDisplay = (props: TextDisplayProps) => {
     }
 
     return(
-        <group>
+        <group rotation={props.rotation}>
             <pointLight intensity={10000.0} position={lightPos} />
             <Text
                     position={props.position}
