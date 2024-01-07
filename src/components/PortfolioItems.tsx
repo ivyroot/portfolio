@@ -9,29 +9,24 @@ export interface PortfolioItemsProps {
 
 const items = [
     {
-        'title': 'ivyroot',
+        'title': 'Ivyroot',
         'url': 'https://www.warpcast.com/ivyroot',
         'description': 'Portfolio of creative projects:'
     },
     {
         'title': 'Exquisite Canvas',
         'url': 'https://www.exquisitecanvas.xyz',
-        'description': 'Draw your own pixel art.'
+        'description': 'Minimal tool to draw your own pixel art.'
     },
     {
         'title': 'Token Parade',
         'url': 'https://www.tokenparade.xyz',
-        'description': "Parade the art for any Ethereum account."
+        'description': "Animated visualization of the NFTs in an Ethereum account."
     },
     {
         'title': 'Nonagon Cup',
         'url': 'https://nonagoncup.com/wrap/?tokenId=23',
         'description': "Wrap a 3D cup in your browser."
-    },
-    {
-        'title': 'Saffene Phone Stand',
-        'url': 'https://www.saffene.com',
-        'description': "Robust minimal phone stand."
     },
     {
         'title': 'Burn Note',
@@ -44,7 +39,7 @@ const items = [
         'description': "View your camera roll in random order (inactive)."
     },
     {
-        'title': '@ivyroot',
+        'title': '@Ivyroot',
         'url': 'https://www.warpcast.com/ivyroot',
         'description': 'Follow me on Farcaster.'
     },
