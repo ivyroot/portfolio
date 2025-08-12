@@ -1,101 +1,55 @@
-import React,  { Suspense, useState } from 'react';
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Environment } from "@react-three/drei";
+import React from 'react';
 import './App.css';
-import { PortfolioItems } from './components/PortfolioItems';
-import { useScreenSize } from './hooks/useScreenSize';
-
-const Scene = (props: {offset: number, rotation: number}) => {
-  return (
-    <>
-      <Environment files="/field_2k.hdr" background={true} />
-      <PortfolioItems offset={props.offset} rotation={props.rotation} />
-    </>
-  );
-};
+import { items } from './components/PortfolioItems';
 
 function App() {
-  const screenSize = useScreenSize();
-  const isMobile = screenSize.width && screenSize.width < 500;
-
-  const minOffset = 0.0
-  const maxOffset = isMobile ? 17:  30
-
-  const [offset, setOffset] = React.useState(minOffset);
-  const [rotation, setRotation] = React.useState(0)
-  const [initialTouchY, setInitialTouchY] = useState<number | null>(null);
-  const [initialTouchX, setInitialTouchX] = useState<number | null>(null);
-
-  const onWheel = (e: React.WheelEvent) => {
-    const newOffset = offset + (e.deltaY * 0.01);
-    const cappedOffset = Math.max(Math.min(maxOffset, newOffset), minOffset);
-    setOffset(cappedOffset);
-  }
-
-  const handleTouchStart = (event: React.TouchEvent) => {
-    setInitialTouchY(event.touches[0].clientY);
-    setInitialTouchX(event.touches[0].clientX);
-  };
-
-  const handleTouchMove = (event: React.TouchEvent) => {
-    if (initialTouchY === null) return;
-    if (!isMobile) return;
-    const currentTouchY = event.touches[0].clientY;
-    const differenceY = currentTouchY - initialTouchY;
-    const newOffset = offset + (differenceY * -0.0010)
-    const cappedOffset = Math.max(Math.min(maxOffset, newOffset), minOffset);
-    setOffset(cappedOffset);
-
-
-    const currentTouchX = event.touches[0].clientX;
-    const differenceX = initialTouchX ? currentTouchX - initialTouchX : currentTouchX;
-    const newRotation = rotation + (differenceX * 0.00010)
-    setRotation(newRotation)
-  };
-
-  const handleTouchEnd = () => {
-    // Reset initial touch position
-    setInitialTouchY(null);
-  };
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <div
-          style={{
-            height: "100vh",
-            width: "100vw",
-          }}
-        >
-          <Canvas
-            camera={{
-              near: 0.1,
-              far: 1000,
-              zoom: 1,
-              position: [2, 2, 7],
-            }}
-            onCreated={({ gl }) => {
-              gl.setClearColor("white");
-            }}
-            onWheel={onWheel}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+    <div className="container">
+      <div className="header">
+        <h1 className="title">ivyroot</h1>
+        <p className="subtitle">
+          crypto dev
+        </p>
+      </div>
+      <div className="list">
+        {items.map((item) => (
+          <a
+            key={item.title}
+            className="item"
+            href={item.url}
+            target="_blank"
+            rel="noreferrer noopener"
           >
-            {!isMobile &&
-              <OrbitControls
-                enableZoom={false}
-                autoRotate={true}
-                autoRotateSpeed={0.1}
-                enableDamping={true} />
-            }
-            <Suspense fallback={null}>
-              <Scene offset={offset} rotation={rotation} />
-            </Suspense>
-          </Canvas>
-        </div>
-
-      </header>
+            <div className="itemTitle">
+              <span>{item.title}</span>
+              <svg
+                className="ext"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden
+                focusable="false"
+              >
+                <path
+                  d="M14 3h7v7m0-7L10 14"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M21 13v7H3V3h7"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+            <div className="itemDesc">{item.description}</div>
+          </a>
+        ))}
+      </div>
     </div>
   );
 }

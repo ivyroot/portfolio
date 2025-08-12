@@ -1,13 +1,97 @@
+:root {
+  --bg: #ffffff;
+  --fg: #1c1c1c;
+  --muted: #5a5a5a;
+  --accent: #0b5fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 20px 80px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.title {
+  margin: 0;
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: 0.2px;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.item {
+  padding: 16px 18px;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  transition: transform 180ms ease, box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.item:hover {
+  transform: translateY(-2px);
+  border-color: #dcdcdc;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+.itemTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.itemTitle .ext {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+}
+
+.itemDesc {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
 }
