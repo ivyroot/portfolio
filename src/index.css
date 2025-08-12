@@ -34,6 +34,26 @@ a {
   padding: 48px 20px 80px;
 }
 
+.hero {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.hero .header {
+  margin-bottom: 0;
+  margin-top: 2px;
+}
+
 .header {
   display: flex;
   flex-direction: column;

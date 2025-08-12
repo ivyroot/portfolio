@@ -6,16 +6,6 @@ export interface Item {
 
 export const items: Item[] = [
     {
-        'title': '@ivyroot',
-        'url': 'https://www.warpcast.com/ivyroot',
-        'description': 'Follow me on Farcaster.'
-    },
-    {
-        'title': '@ivyroot_zk',
-        'url': 'https://www.x.com/ivyroot_zk',
-        'description': 'Follow me on X.'
-    },
-    {
         'title': 'StickerChain',
         'url': 'https://www.stickerchain.xyz',
         'description': 'Slap stickers anywhere on the planet.'
@@ -34,6 +24,16 @@ export const items: Item[] = [
         'title': 'Nonagon Cup',
         'url': 'https://nonagoncup.com/wrap/?tokenId=23',
         'description': "Wrap a 3D cup in your browser."
+    },
+    {
+        'title': '@ivyroot',
+        'url': 'https://www.warpcast.com/ivyroot',
+        'description': 'Follow me on Farcaster.'
+    },
+    {
+        'title': '@ivyroot_zk',
+        'url': 'https://www.x.com/ivyroot_zk',
+        'description': 'Follow me on X.'
     },
 ]
 export const PortfolioItems = () => null;

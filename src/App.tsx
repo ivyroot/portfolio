@@ -5,11 +5,20 @@ import { items } from './components/PortfolioItems';
 function App() {
   return (
     <div className="container">
-      <div className="header">
-        <h1 className="title">ivyroot</h1>
-        <p className="subtitle">
-          crypto dev
-        </p>
+      <div className="hero">
+        <img
+          className="avatar"
+          src="/kitoshi-3241.png"
+          alt="ivyroot profile pic"
+          width={72}
+          height={72}
+          loading="eager"
+          decoding="async"
+        />
+        <div className="header">
+          <h1 className="title">ivyroot</h1>
+          <p className="subtitle">crypto projects list</p>
+        </div>
       </div>
       <div className="list">
         {items.map((item) => (
